@@ -66,9 +66,9 @@ class FilmController extends Controller
      * @param  \App\Film  $film
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        $film = Film::find($id);
+        $film = Film::whereSlug($slug)->firstOrFail();
         if($film){
             return response()->json([
                 'success' => true,
