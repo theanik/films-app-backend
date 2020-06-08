@@ -16,11 +16,11 @@ class CreateFilmsTable extends Migration
         Schema::create('films', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('slug');
+            $table->string('slug')->unique();
             $table->text('description');
             $table->date('release_date');
-            $table->integer('rating');
-            $table->integer('rating_pepole_count')->nullable();
+            $table->integer('rating')->default(0);
+            $table->integer('rating_pepole_count')->default(0);
             $table->double('ticket_price', 15, 8);
             $table->string('country');
             $table->string('genre');
