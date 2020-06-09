@@ -19,8 +19,6 @@ class CreateFilmsTable extends Migration
             $table->string('slug')->unique();
             $table->text('description');
             $table->date('release_date');
-            $table->integer('rating')->default(0);
-            $table->integer('rating_pepole_count')->default(0);
             $table->double('ticket_price', 15, 8);
             $table->string('country');
             $table->string('genre');

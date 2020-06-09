@@ -20,14 +20,24 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::group(['prefix' => 'v1','namespace'=>'Api'], function () {
     // Api auth route
-    Route::post('login', 'AuthController@login');
-    Route::post('signup', 'AuthController@signup');
+    Route::post('/login', 'AuthController@login');
+    Route::post('/signup', 'AuthController@signup');
 
     Route::get('/films','FilmController@index');
-    Route::get('/film/{slug}','FilmController@show');
+    Route::get('/films/{slug}','FilmController@show');
+   
 
     Route::group(['middleware' => 'auth:api'], function() {
+        // film
         Route::post('/films','FilmController@store');
+
+        //comment - rating
+        Route::post('/rating','RatingController@store');
+        Route::get('/rating/current/{user_id}/{film_id}','RatingController@currentUserRate');
+       
+        Route::post('/comment','CommentController@store');
+
+        // auth
         Route::get('logout', 'AuthController@logout');
         Route::get('user', 'AuthController@user');
     });

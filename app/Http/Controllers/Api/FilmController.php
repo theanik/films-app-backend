@@ -16,12 +16,12 @@ class FilmController extends Controller
      */
     public function index()
     {
-        $films = Film::orderBy('id','DESC')->paginate(3);
+        $films = Film::with('comments')->with('rating')->orderBy('id','DESC')->paginate(3);
         if($films){
             return response()->json([
                 'success' => true,
                 'films' => $films
-            ], 201);
+            ], 200);
         }
     }
 
@@ -69,16 +69,18 @@ class FilmController extends Controller
     public function show($slug)
     {
         $film = Film::whereSlug($slug)->firstOrFail();
+
         if($film){
+            $film = Film::with('comments')->with('rating')->find($film->id);
             return response()->json([
                 'success' => true,
                 'film' => $film
-            ], 201);
+            ], 200);
         }else{
             return response()->json([
                 'success' => false,
                 'message' => 'Film not found!!'
-            ],400);
+            ],404);
         }
     }
 
