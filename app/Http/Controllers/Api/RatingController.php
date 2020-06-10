@@ -39,9 +39,9 @@ class RatingController extends Controller
      * @param  mixed $film_id
      * @return void
      */
-    public function currentUserRate($user_id, $film_id)
+    public function currentUserRate(Request $request, $film_id)
     {
-        $rate = Rating::where('user_id',$user_id)
+        $rate = Rating::where('user_id',$request->user()->id)
                     ->where('film_id', $film_id)->first();
         if($rate){
             return response()->json([
@@ -51,7 +51,7 @@ class RatingController extends Controller
         }else{
             return response()->json([
                 'success' => false,
-            ], 404);
+            ], 200);
         }
                     
     }

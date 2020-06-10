@@ -57,7 +57,6 @@ class FilmController extends Controller
                 'message' => 'Something wend wrong!!'
             ],400);
         }
-
     }
 
     /**
@@ -71,7 +70,7 @@ class FilmController extends Controller
         $film = Film::whereSlug($slug)->firstOrFail();
 
         if($film){
-            $film = Film::with('comments')->with('rating')->find($film->id);
+            $film = Film::with('comments.user')->with('rating')->find($film->id);
             return response()->json([
                 'success' => true,
                 'film' => $film

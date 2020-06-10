@@ -33,7 +33,7 @@ Route::group(['prefix' => 'v1','namespace'=>'Api'], function () {
 
         //comment - rating
         Route::post('/rating','RatingController@store');
-        Route::get('/rating/current/{user_id}/{film_id}','RatingController@currentUserRate');
+        Route::get('/rating/current/{film_id}','RatingController@currentUserRate');
        
         Route::post('/comment','CommentController@store');
 
