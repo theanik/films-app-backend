@@ -44,7 +44,7 @@ class FilmRequest extends FormRequest
             'country.required' => 'Please Enter country',
             'genre.required'  => 'Please Enter film type',
             'photo.required'  => 'Please Provide a banner',
-            'photo.photo'  => 'Banner type must be jpeg or png or jpg',
+            'photo.mimes'  => 'Banner type must be jpeg or png or jpg',
         ];
     }
 
